@@ -19,7 +19,7 @@ To add this layer to your project simply add the following to the `nuxt.config.t
 
 ```ts
 extends: [
-    ["github:codywakeford/nuxt-users#master",  {install: true }]
+    ["github:codywakeford/nuxt-user#master",  { install: true }]
 ]
 ```
 
