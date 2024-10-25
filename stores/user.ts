@@ -1,10 +1,11 @@
+// const database = serviceLayerConfig.database
+
 // A file containing all the functions specifically for the logged in user //
 /**
  * TODO: Add email capabilities.
  */
-
 import { defineStore } from "pinia"
-
+// const database = "firestore"
 export const useUserStore = defineStore("user", {
 	state: () => ({
 		user: {} as User,
@@ -50,7 +51,9 @@ export const useUserStore = defineStore("user", {
 
 		/**Create a new user using email and password. */
 		async register(email: string, password: string) {
-			await $fetch("/api/user", {
+			const database = useServicesConfig().database
+
+			await $fetch(`/api/${database}/user`, {
 				method: "POST",
 				body: { email, password },
 			})
@@ -58,11 +61,13 @@ export const useUserStore = defineStore("user", {
 
 		/**Log in using email and password. */
 		async login(email: string, password: string, remember: boolean = true) {
+			const database = useServicesConfig().database
+
 			if (this.user) {
 				console.error("[$User] User already logged in.")
 			}
 
-			const { data, error } = await $fetch<ServerResponse>("/api/user/login", {
+			const { data, error } = await $fetch<ServerResponse>(`/api/${database}/user/login`, {
 				method: "POST",
 				body: { email, password },
 			})
@@ -81,7 +86,10 @@ export const useUserStore = defineStore("user", {
 		},
 
 		async addRole(role: string) {
-			await $fetch("/api/user/role", {
+			const database = useServicesConfig().database
+
+			console.log(database)
+			await $fetch(`/api/${database}/user/role`, {
 				method: "PUT",
 				body: {
 					id: this.user.id,
@@ -92,7 +100,8 @@ export const useUserStore = defineStore("user", {
 		},
 
 		async removeRole(role: string) {
-			await $fetch("/api/user/role", {
+			const database = useServicesConfig().database
+			await $fetch(`/api/${database}/user/role`, {
 				method: "PUT",
 				body: {
 					id: this.user.id,
