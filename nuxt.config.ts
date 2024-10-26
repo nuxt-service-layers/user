@@ -4,6 +4,11 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 	modules: ["@pinia/nuxt"],
 
-	// Extend from the nuxt service layer. Provide your firebase config in the .env file //
-	extends: [["../database", { install: true }]],
+	extends: [
+		// DB interface layer
+		["../database", { install: true }],
+
+		// Globals layer
+		["../base", { install: true }],
+	],
 })
