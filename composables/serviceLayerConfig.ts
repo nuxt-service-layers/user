@@ -1,5 +1,6 @@
-export function useServicesConfig(): ServiceLayerConfig {
+export function useServicesConfig(): ServiceConfig {
 	const nuxtApp = useNuxtApp()
 	const $servicesConfig = nuxtApp.$servicesConfig
-	return $servicesConfig as ServiceLayerConfig
+	console.log($servicesConfig)
+	return $servicesConfig as ServiceConfig
 }

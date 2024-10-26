@@ -7,8 +7,6 @@ let $User: UserStore
 export async function initUser() {
 	$User = useUserStore()
 	$User.init()
-
-	console.log("$User initialized")
 }
 
 export { $User }

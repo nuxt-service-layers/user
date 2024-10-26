@@ -40,9 +40,8 @@ export const useUserStore = defineStore("user", {
 	actions: {
 		async init() {
 			if (!import.meta.client) return
-
 			const userCache = localStorage.getItem("$User")
-			if (userCache) {
+			if (userCache && userCache !== "undefined") {
 				this.user = JSON.parse(userCache)
 
 				//TODO: Set up firestore db listener to user doc.
@@ -51,7 +50,7 @@ export const useUserStore = defineStore("user", {
 
 		/**Create a new user using email and password. */
 		async register(email: string, password: string) {
-			const database = useServicesConfig().database
+			const database = $ServicesConfig.database
 
 			await $fetch(`/api/${database}/user`, {
 				method: "POST",
@@ -61,11 +60,11 @@ export const useUserStore = defineStore("user", {
 
 		/**Log in using email and password. */
 		async login(email: string, password: string, remember: boolean = true) {
-			const database = useServicesConfig().database
-
-			if (this.user) {
-				console.error("[$User] User already logged in.")
-			}
+			const database = $ServicesConfig.database
+			console.log(this.user)
+			// if (this.user) {
+			// 	console.error("[$User] User already logged in.")
+			// }
 
 			const { data, error } = await $fetch<ServerResponse>(`/api/${database}/user/login`, {
 				method: "POST",

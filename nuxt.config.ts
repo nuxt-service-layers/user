@@ -10,5 +10,6 @@ export default defineNuxtConfig({
 
 		// Globals layer
 		["../base", { install: true }],
+		["../emails", { install: true }],
 	],
 })
