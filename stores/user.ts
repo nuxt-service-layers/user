@@ -52,7 +52,7 @@ export const useUserStore = defineStore("user", {
 		async register(email: string, password: string) {
 			const database = $ServicesConfig.database
 
-			await $fetch(`/api/${database}/user`, {
+			await $fetch(`/api/${database}/user/register`, {
 				method: "POST",
 				body: { email, password },
 			})

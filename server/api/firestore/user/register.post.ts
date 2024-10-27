@@ -2,9 +2,12 @@ import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
 import bcrypt from "bcryptjs"
 
 export default eventHandler(async (event) => {
+	console.log("herer")
 	const db = event.context.db
 	const { email, password } = await readBody(event)
 	let response: ServerResponse = { data: null, error: null }
+
+	console.log(email, password)
 
 	if (!email || !password) {
 		throw createError({
